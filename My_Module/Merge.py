@@ -1,0 +1,12 @@
+import pandas as pd
+customers=pd.read_excel("C://MyDataSets//HclOrders.xlsx",sheet_name="Customers")
+orders=pd.read_excel("C://MyDataSets//HclOrders.xlsx",parse_dates=["order_date"],sheet_name="Orders")
+products=pd.read_excel("C://MyDataSets//HclOrders.xlsx",sheet_name="Products")
+result=pd.merge(left=customers,right=orders,on="cust_id",how="left",indicator='both')
+result1=pd.merge(left=orders,right=products,on="order_id",how="inner")
+print(result)
+print(result1)
+result2=pd.merge(left=result,right=result1,on="order_id",how="inner")
+print(result2)
+r=pd.concat([customers,orders],axis=0)
+print(r)
